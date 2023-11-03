@@ -1,0 +1,28 @@
+--테이블 생성 구문
+--PERSON 테이블 생성
+--	이름  문자열
+--  나이  정수
+CREATE TABLE PERSON(
+	PNAME VARCHAR2(30),
+	AGE NUMBER(3)
+);
+
+DROP TABLE PERSON;
+
+--학생 테이블
+--학번, 이름, 학과명, 평점
+CREATE TABLE STUDENT(
+	STD_NO CHAR(8),
+	STD_NAME VARCHAR2(30),
+	STD_MAJOR VARCHAR2(50),
+	STD_SCORE NUMBER(3,2)
+);
+
+
+
+
+
+
+
+
+
