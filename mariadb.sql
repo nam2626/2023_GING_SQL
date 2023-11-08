@@ -56,11 +56,23 @@ create table subject_sugang(
 	add_time timestamp default current_timestamp
 );
 #학생 테이블에 학과번호를 외래키로 지정, 학과 테이블에 있는 학과번호를 참조
+alter table student add constraint sdt_fk_majro_no
+foreign key(major_no) references major(major_no) on update cascade;
 #과목 테이블에서 교수번호를 외래키로 지정, 교수 테이블에 있는 교수번호를 참조
+alter table subject add constraint subject_fk_professor_no
+foreign key(professor_no) 
+references professor(professor_no) on delete cascade on update cascade;
 #교수 테이블에서 학과번호를 외래키로 지정, 학과 테이블에 있는 학과번호를 참조
+alter table professor add constraint professor_fk_major_no
+foreign key(major_no) references major(major_no);
 #수강 테이블에서 학생번호,과목번호를 외래키로 지정, 
 #학생 테이블에 있는 학생번호를 참조, 과목 테이블에 있는 과목번호를 참조
-
+alter table subject_sugang add constraint sugang_fk_std_no
+foreign key(student_no) references student(std_no)
+on delete cascade on update cascade;
+alter table subject_sugang add constraint sugang_fk_subject_no
+foreign key(subject_no) references subject(subject_no)
+on delete cascade on update cascade;
 
 
 
