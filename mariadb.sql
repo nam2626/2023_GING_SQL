@@ -85,7 +85,35 @@ alter table subject add constraint subject_check_total_count
 check(total_count >= 0);
 
 #각 테이블에 데이터 5건씩 추가하는 insert문 작성
-insert into major values(1,'테스트');
+insert into major values(1,'컴퓨터공학과');
+insert into major values(2,'경영학과');
+insert into major values(3,'경제학과');
+insert into major values(4,'생명공학과');
+insert into major values(5,'생활체육학과');
+
+insert into student values('20201111','홍길동',3,2.4);
+insert into student values('20202222','김철수',1,3.4);
+insert into student values('20203333','황보원',4,4.4);
+insert into student values('20204444','이인수',5,1.5);
+insert into student values('20205555','박철수',2,3.6);
+
+insert into professor values('20101111','김교수', 1);
+insert into professor values('20102222','이교수', 2);
+insert into professor values('20103333','박교수', 3);
+insert into professor values('20104444','천교수', 4);
+insert into professor values('20105555','황교수', 5);
+
+insert into subject values(1,'대학수학','20101111',30);
+insert into subject values(2,'해부학','20102222',22);
+insert into subject values(3,'미시경제학','20103333',30);
+insert into subject values(4,'운동학개론','20104444',10);
+insert into subject values(5,'경영학개론','20105555',50);
+
+insert into subject_sugang(student_no, subject_no) values('20201111', 1);
+insert into subject_sugang(student_no, subject_no) values('20202222', 1);
+insert into subject_sugang(student_no, subject_no) values('20203333', 1);
+insert into subject_sugang(student_no, subject_no) values('20201111', 2);
+insert into subject_sugang(student_no, subject_no) values('20201111', 3);
 
 #테이블 삭제
 drop table student;
@@ -93,6 +121,8 @@ drop table subject;
 drop table major;
 drop table professor;
 drop table subject_sugang;
+
+
 
 
 
