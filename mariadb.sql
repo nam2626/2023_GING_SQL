@@ -75,8 +75,11 @@ foreign key(subject_no) references subject(subject_no)
 on delete cascade on update cascade;
 
 #학생테이블의 평점은 0.0~4.5로 제약조건 추가
+alter table student add constraint std_check_score 
+check(std_score between 0.0 and 4.5);
 #과목테이블의 총수강인원은 0 이상 입력되게끔 제약조건을 추가
-
+alter table subject add constraint subject_check_total_count
+check(total_count >= 0);
 
 
 
