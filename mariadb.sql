@@ -74,6 +74,9 @@ alter table subject_sugang add constraint sugang_fk_subject_no
 foreign key(subject_no) references subject(subject_no)
 on delete cascade on update cascade;
 
+#학생테이블의 평점은 0.0~4.5로 제약조건 추가
+#과목테이블의 총수강인원은 0 이상 입력되게끔 제약조건을 추가
+
 
 
 
