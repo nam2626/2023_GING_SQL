@@ -1,6 +1,9 @@
 #관리자 계정으로 진행 - root
 #DB 생성
-create database nam2626;
+create database student DEFAULT CHARACTER SET utf8mb4 collate utf8mb4_general_ci;
+drop database student;
+#DB 문자코드 변경
+ALTER DATABASE 디비명 DEFAULT CHARACTER SET utf8mb4 collate utf8mb4_general_ci;
 
 #계정 생성 방법
 create user 'nam2626'@'%' identified by '123456';
@@ -81,7 +84,15 @@ check(std_score between 0.0 and 4.5);
 alter table subject add constraint subject_check_total_count
 check(total_count >= 0);
 
+#각 테이블에 데이터 5건씩 추가하는 insert문 작성
+insert into major values(1,'테스트');
 
+#테이블 삭제
+drop table student;
+drop table subject;
+drop table major;
+drop table professor;
+drop table subject_sugang;
 
 
 
