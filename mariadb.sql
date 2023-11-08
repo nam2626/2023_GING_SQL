@@ -42,7 +42,24 @@ create table subject(
 	professor_no char(8) not null,
 	total_count int(3) default 0
 );
-
+#교수 테이블
+create table professor(
+	professor_no char(8) primary key,
+	professor_name varchar(30) not null,
+	major_no decimal(2) default 0
+);
+#수강 테이블
+create table subject_sugang(
+	su_no int auto_increment primary key,
+	student_no char(8) not null,
+	subject_no decimal(2) not null,
+	add_time timestamp default current_timestamp
+);
+#학생 테이블에 학과번호를 외래키로 지정, 학과 테이블에 있는 학과번호를 참조
+#과목 테이블에서 교수번호를 외래키로 지정, 교수 테이블에 있는 교수번호를 참조
+#교수 테이블에서 학과번호를 외래키로 지정, 학과 테이블에 있는 학과번호를 참조
+#수강 테이블에서 학생번호,과목번호를 외래키로 지정, 
+#학생 테이블에 있는 학생번호를 참조, 과목 테이블에 있는 과목번호를 참조
 
 
 
