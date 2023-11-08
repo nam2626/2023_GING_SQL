@@ -108,6 +108,34 @@ CREATE TABLE CAR(
 	CAR_PRICE NUMBER(5)
 );
 
+--자동차 테이블에서 제조사가 BMW인 자동차를 조회
+SELECT * FROM CAR WHERE CAR_MAKER LIKE 'BMW';
+--자동차 테이블에서 제조사가 BMW이거나 제조사가 Mercedes인 자동차를 조회
+SELECT * FROM CAR 
+WHERE CAR_MAKER LIKE 'BMW' OR CAR_MAKER LIKE 'Mercedes%';
+SELECT * FROM CAR 
+WHERE CAR_MAKER IN('BMW','Mercedes-Benz');
+--자동차 테이블에서 제조사가 BMW이거나 Mercedes, Audi인 자동차를 조회
+SELECT * FROM CAR 
+WHERE CAR_MAKER IN('BMW','Mercedes-Benz','Audi');
+--자동차 테이블에서 자동차금액이 7000이상 9000이하인 자동차를 조회
+SELECT * FROM CAR WHERE CAR_PRICE BETWEEN 7000 AND 9000;
+--자동차 테이블에서 제조사가 Kia이면서 자동차금액이 7000이상 9000이하인 자동차를 조회
+SELECT * FROM CAR 
+WHERE CAR_PRICE BETWEEN 7000 AND 9000 AND CAR_MAKER LIKE 'Kia';
+--자동차 테이블에서 자동차번호가 3번째 자리가 8, 4번째 자리가 9인 자동차를 조회
+SELECT * FROM CAR WHERE CAR_ID LIKE '__89%';
+--자동차 테이블에서 금액이 10000넘는 자동차의 금액을 3000씩 금액을 낮추세요
+UPDATE CAR SET CAR_PRICE = CAR_PRICE - 3000
+WHERE CAR_PRICE > 10000;
+--자동차 테이블에서 제조사가 Jeep인 데이터를 삭제하세요
+SELECT * FROM CAR WHERE CAR_MAKER LIKE 'Jeep';
+DELETE FROM CAR WHERE CAR_MAKER LIKE 'Jeep';
+
+
+
+
+
 
 
 
