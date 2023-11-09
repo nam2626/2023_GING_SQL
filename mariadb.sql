@@ -122,6 +122,38 @@ drop table major;
 drop table professor;
 drop table subject_sugang;
 
+#학생 평점이 3.0 ~ 3.5인 학생만 조회
+select * from student where std_score between 3.0 and 3.5;
+#학생 이름 중 김씨, 이씨 성인 학생만 조회
+select * from student 
+where std_name like '김%' or std_name like '이%';
+#학과번호가 1, 3, 5, 7, 9인 학생만 조회
+select * from student where major_no in(1,3,5,7,9); 
+
+#학생정보 출력시 학생 이름, 학생 이름의 글자 개수만 조회
+select std_name, length(std_name) / 3 as std_name_length from student;
+#학생정보 출력시 학번, 이름 학번은 뒤에 4자리만 조회, 앞에 4자리는 *로 마스킹
+select concat('****', right(std_no,4)), std_name  from student;
+
+#학생이름이 4글자인 학생만 조회
+select * from student where length(std_name) / 3 = 4; 
+select * from student where std_name like '____'; 
+#학과번호가 짝수인 학생만 조회
+select * from student where mod(major_no,2) = 0;
+select * from student where major_no % 2 = 0;
+#수강 테이블에서 수강신청 날짜가 11월 15일~11월 20일까지의 수강신청 데이터를 조회
+select * from subject_sugang where
+add_time between str_to_date('2023-11-15','%Y-%m-%d') and str_to_date('2023-11-30','%Y-%m-%d');  
+select * from subject_sugang where
+add_time between '2023-11-15' and '2023-11-30';  
+
+
+
+
+
+
+
+
 
 
 
