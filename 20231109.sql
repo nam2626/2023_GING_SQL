@@ -22,6 +22,48 @@ SELECT AVG(STD_SCORE), COUNT(*), MAX(STD_SCORE), MIN(STD_SCORE)  FROM STUDENT;
 SELECT STD_MAJOR, COUNT(*) FROM STUDENT 
 WHERE STD_SCORE >= 3.0
 GROUP BY STD_MAJOR;
+--학과별 평점을 조회. 단, 학과인원수가 3명이상인 학과만 대상으로 조회
+SELECT STD_MAJOR, avg(STD_SCORE) 
+FROM STUDENT 
+GROUP BY STD_MAJOR HAVING count(*) >= 3 ;
+--학번이 10 학번인 학생들의 각 학과별 인원수를 출력    
+SELECT STD_MAJOR, count(*) 
+FROM STUDENT 
+WHERE substr(STD_NO,1,4) = '2010'
+GROUP BY STD_MAJOR;
+--학번별 인원수, 평점의 평균을 조회
+SELECT SUBSTR(STD_NO,1,4), count(*), avg(std_score)
+FROM STUDENT
+GROUP BY SUBSTR(STD_NO,1,4);
+--학번-학과별 인원수 조회
+SELECT STD_MAJOR, SUBSTR(STD_NO,1,4), COUNT(*)  
+FROM STUDENT
+GROUP BY STD_MAJOR, SUBSTR(STD_NO,1,4);
+
+--자동차 메이커별 제품 개수, 평균 금액
+SELECT CAR_MAKER, COUNT(*), AVG(CAR_PRICE)  
+FROM CAR
+GROUP BY CAR_MAKER;
+--년도별 자동차 제품 개수
+SELECT CAR_MAKE_YEAR, COUNT(*)
+FROM CAR
+GROUP BY CAR_MAKE_YEAR;
+--년도별, 메이커별, 제품 개수, 평균 금액
+SELECT CAR_MAKE_YEAR, CAR_MAKER, COUNT(*), AVG(CAR_PRICE)  
+FROM CAR
+GROUP BY CAR_MAKE_YEAR, CAR_MAKER;
+--자동차 메이커별 제품 개수, 평균 금액, 단 제품개수가 40대 이상인 회사로 제한
+SELECT CAR_MAKER, COUNT(*), AVG(CAR_PRICE)  
+FROM CAR
+GROUP BY CAR_MAKER HAVING count(*) >= 40;
+
+
+
+
+
+
+
+
 
 
 

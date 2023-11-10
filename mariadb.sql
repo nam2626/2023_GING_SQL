@@ -147,6 +147,33 @@ add_time between str_to_date('2023-11-15','%Y-%m-%d') and str_to_date('2023-11-3
 select * from subject_sugang where
 add_time between '2023-11-15' and '2023-11-30';  
 
+-- 학과별 평점 총합을 조회
+select major_no, avg(std_score) from student
+group by major_no ;
+-- 학과별 평점의 평균을 조회, 소수점은 둘째 자리까지만, 컬럼명을 AVG_SCORE로 변경해서 조회
+select major_no, truncate(avg(std_score),2) as avg_score from student
+group by major_no ;
+-- 학과별 인원수를 조회
+select major_no, count(*) from student
+group by major_no ;
+-- 학과별 평점의 최대값/최소값 조회
+select major_no, max(std_score), min(std_score) from student
+group by major_no ;
+-- 전체 인원을 대상으로 평점, 인원수, 최대값, 최소값
+select count(*), max(std_score), min(std_score) from student;
+-- 학과별 인원수를 조회, 단 평점이 3.0 이상인 학생들만 대상으로 인원수를 조회
+select major_no, count(*) from student
+where std_score  >= 3.0;
+group by major_no ;
+-- 학과별 평점을 조회. 단, 학과인원수가 3명이상인 학과만 대상으로 조회
+select major_no, avg(std_score) from student
+group by major_no having count(*) >= 3;
+-- 학번별 인원수, 평점의 평균을 조회
+select substr(std_no,1,4), avg(std_score),count(*) from student
+group by substr(std_no,1,4); 
+-- 학번-학과별 인원수 조회
+select substr(std_no,1,4), major_no ,count(*) from student
+group by substr(std_no,1,4), major_no ; 
 
 
 
