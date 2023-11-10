@@ -134,3 +134,35 @@ FROM STUDENT s, STUDENT_SCHOLARSHIP ss, MAJOR m
 WHERE s.STD_NO = ss.STD_NO(+)
 	  AND s.MAJOR_NO = m.MAJOR_NO
 	  AND ss.STD_NO IS NULL; 
+	 
+--사원 정보 조회 : 사원번호 사원명 직급명 부서명 급여
+SELECT e.EMP_NO, e.EMP_NAME, p.POS_NAME, d.DEPT_NAME, e.EMP_SALARY
+FROM EMPLOYEE e
+JOIN DEPARTMENT d 
+ON e.DEPT_NO = d.DEPT_NO
+JOIN POSITION p
+ON e.POS_NO = p.POS_NO;
+
+--car 테이블에 있는 제조사를 별도의 테이블로 분리 작업
+--   제조사 코드 : AA-0-000
+
+SELECT TRUNC(dbms_random.value(1,20),0), chr(65)  FROM dual;
+
+CREATE TABLE CAR_MAKER
+AS
+SELECT UPPER(dbms_random.string('A',2)) || '-' || 
+	TRUNC(dbms_random.value(0,10),0)|| '-' || 
+	TRUNC(dbms_random.value(100,1000),0) AS CAR_MAKER_CODE, 
+	CAR_MAKER AS CAR_MAKER_NAME
+FROM 
+(SELECT DISTINCT CAR_MAKER FROM CAR);
+
+ALTER TABLE CAR_MAKER ADD CONSTRAINT CAR_MAKER_PK
+PRIMARY KEY(CAR_MAKER_CODE);
+	 
+	 
+	 
+	 
+	 
+	 
+	 
