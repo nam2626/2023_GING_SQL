@@ -184,6 +184,13 @@ UPDATE CAR SET CAR_MAKER_CODE =
 
 ALTER TABLE CAR DROP COLUMN CAR_MAKER;
 
+--자동차 정보 조회시 자동차 번호, 자동차 모델명, 제조사명, 제조년도, 금액
+
+
+
+
+
+
 
 
 
