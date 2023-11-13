@@ -288,11 +288,31 @@ ON cs.M_ID = m.M_ID
 JOIN GRADE g
 ON m.GRADE_NO = g.GRADE_NO;
 
+--년도별 / 월별, 제조사별, 판매 대수 총합, 판매액 총합 조회
+SELECT to_char(cs.CAR_SELL_DATE,'YYYY/MM'), cm.CAR_MAKER_NAME, 
+sum(cs.CAR_SELL_EA), sum(cs.CAR_SELL_PRICE)
+FROM CAR_SELL cs
+JOIN CAR c ON cs.CAR_ID = c.CAR_ID
+JOIN CAR_MAKER cm ON c.CAR_MAKER_CODE = cm.CAR_MAKER_CODE
+GROUP BY to_char(cs.CAR_SELL_DATE,'YYYY/MM'), cm.CAR_MAKER_NAME;
 
+--년도별, 회원 등급별, 판매 대수 총합, 판매액 총합, 최고 판매액, 최저 판매액
+SELECT TO_CHAR(cs.CAR_SELL_DATE,'YYYY'), g.GRADE_NAME , SUM(cs.CAR_SELL_EA),
+SUM(cs.CAR_SELL_PRICE), MAX(cs.CAR_SELL_PRICE), MIN(cs.CAR_SELL_PRICE)  
+FROM CAR_SELL cs JOIN MEMBER m ON cs.M_ID = m.M_ID
+JOIN GRADE g ON m.GRADE_NO = g.GRADE_NO
+GROUP BY TO_CHAR(cs.CAR_SELL_DATE,'YYYY'), g.GRADE_NAME;
 
+--제조사별, 차량별, 회원 등급별, 차량 판매 대수 조회
+SELECT cm.CAR_MAKER_NAME, c.CAR_NAME, g.GRADE_NAME, sum(cs.CAR_SELL_EA)
+FROM CAR_SELL cs JOIN CAR c ON cs.CAR_ID = c.CAR_ID
+JOIN CAR_MAKER cm ON cm.CAR_MAKER_CODE = c.CAR_MAKER_CODE
+JOIN MEMBER m ON m.M_ID = cs.M_ID
+JOIN GRADE g ON m.GRADE_NO = g.GRADE_NO
+GROUP BY cm.CAR_MAKER_NAME, c.CAR_NAME, g.GRADE_NAME;
 
-
-
+--회원 성별, 판매 연도별, 차량 구매 횟수 총합, 최고 판매 금액, 최저 판매 금액
+--단 차량 구매 개수 5건 이하인 데이터만 기준으로 조회
 
 
 
