@@ -225,7 +225,13 @@ from professor p
 left outer join subject s on p.professor_no = s.professor_no 
 where s.subject_no is null;
 
-
+-- 수강신청 안한 학생들 중 학과별로 몇명인지 조회
+select m.major_name, count(*)
+from subject_sugang ss right outer join student s
+on ss.student_no = s.std_no
+join major m on s.major_no = m.major_no
+where ss.student_no is null
+group by m.major_name;
 
 
 
