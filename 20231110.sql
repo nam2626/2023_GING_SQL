@@ -241,12 +241,52 @@ ON cs.CAR_ID = c.CAR_ID
 JOIN MEMBER m
 ON cs.M_ID = m.M_ID;
 
+--자동차 판매 정보 조회
+--판매 번호, 판매된 모델명, 판매일, 회원이름, 판매개수, 판매금액
+--외부 조인을 이용해서 모든 자동차 데이터는 조회
+SELECT cs.CAR_SELL_NO, cs.CAR_ID, c.CAR_NAME, cs.CAR_SELL_DATE, m.M_NAME,
+cs.CAR_SELL_EA, cs.CAR_SELL_PRICE 
+FROM CAR_SELL cs RIGHT OUTER JOIN CAR c
+ON cs.CAR_ID = c.CAR_ID 
+JOIN MEMBER m
+ON cs.M_ID = m.M_ID;
+--오라클에서만 됨
+SELECT cs.CAR_SELL_NO, cs.CAR_ID, c.CAR_NAME, cs.CAR_SELL_DATE, m.M_NAME,
+cs.CAR_SELL_EA, cs.CAR_SELL_PRICE 
+FROM CAR_SELL cs, CAR c, MEMBER m
+WHERE cs.CAR_ID(+) = c.CAR_ID
+AND cs.M_ID = m.M_ID;
 
+UPDATE CAR_SELL SET CAR_ID = LPAD(CAR_ID,10,'0'); 
+--2020년도
+SELECT cs.CAR_SELL_NO, cs.CAR_ID, c.CAR_NAME, cs.CAR_SELL_DATE, m.M_NAME,
+cs.CAR_SELL_EA, cs.CAR_SELL_PRICE 
+FROM CAR_SELL cs RIGHT OUTER JOIN CAR c
+ON cs.CAR_ID = c.CAR_ID 
+JOIN MEMBER m
+ON cs.M_ID = m.M_ID
+WHERE to_char(cs.CAR_SELL_DATE,'YYYY') = '2020' ;
+----자동차 판매 정보 조회
+--판매 번호, 판매된 모델명의 제조사, 판매일, 회원이름, 회원등급명, 판매개수, 판매금액
+SELECT cs.CAR_SELL_NO, cm.CAR_MAKER_NAME, 
+cs.CAR_SELL_DATE, m.M_NAME, g.GRADE_NAME,
+cs.CAR_SELL_EA, cs.CAR_SELL_PRICE 
+FROM CAR c, CAR_MAKER cm , CAR_SELL cs , MEMBER m, GRADE g
+WHERE c.CAR_ID = cs.CAR_ID AND c.CAR_MAKER_CODE = cm.CAR_MAKER_CODE 
+AND m.GRADE_NO = g.GRADE_NO AND cs.M_ID = m.M_ID;
 
-
-
-
-
+SELECT cs.CAR_SELL_NO, cm.CAR_MAKER_NAME, 
+cs.CAR_SELL_DATE, m.M_NAME, g.GRADE_NAME,
+cs.CAR_SELL_EA, cs.CAR_SELL_PRICE 
+FROM CAR c
+JOIN CAR_MAKER cm 
+ON c.CAR_MAKER_CODE = cm.CAR_MAKER_CODE
+JOIN CAR_SELL cs 
+ON c.CAR_ID = cs.CAR_ID 
+JOIN MEMBER m
+ON cs.M_ID = m.M_ID 
+JOIN GRADE g
+ON m.GRADE_NO = g.GRADE_NO;
 
 
 
