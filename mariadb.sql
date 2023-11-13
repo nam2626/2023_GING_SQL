@@ -218,6 +218,17 @@ join major m on m.major_no = s.major_no
 join subject sj on ss.subject_no = sj.subject_no
 group by m.major_name, sj.subject_name; 
 
+-- 과목을 담당하지 않는 교수들을 조회
+-- 교수번호, 교수명
+select p.professor_no, p.professor_name  
+from professor p 
+left outer join subject s on p.professor_no = s.professor_no 
+where s.subject_no is null;
+
+
+
+
+
 
 
 
