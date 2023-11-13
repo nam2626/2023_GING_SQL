@@ -203,7 +203,20 @@ right outer join student s on ss.student_no = s.std_no
 join major m on s.major_no = m.major_no
 where ss.su_no is null;
 
+-- 학과별 인원수, 평점의 평균, 최고 평점, 최저 평점을 조회
+select m.major_name, count(*), avg(s.std_score), 
+max(s.std_score), min(s.std_score) 
+from student s join major m on s.major_no = m.major_no
+group by m.major_name;
 
+
+-- 수강신청을 한 학생들을 기준으로 학과별, 과목별, 인원수를 조회
+select m.major_name, sj.subject_name, count(*)
+from student s join subject_sugang ss 
+on s.std_no = ss.student_no
+join major m on m.major_no = s.major_no 
+join subject sj on ss.subject_no = sj.subject_no
+group by m.major_name, sj.subject_name; 
 
 
 
