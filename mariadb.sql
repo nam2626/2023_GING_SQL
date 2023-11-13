@@ -175,9 +175,27 @@ group by substr(std_no,1,4);
 select substr(std_no,1,4), major_no ,count(*) from student
 group by substr(std_no,1,4), major_no ; 
 
-
-
-
+-- 학번, 이름, 학과명, 평점
+select s.std_no, s.std_name, m.major_name, s.std_score 
+from student s join major m ON s.major_no = m.major_no;
+-- 교수번호, 교수명, 학과명
+select p.professor_no, p.professor_name, m.major_name
+from professor p
+join major m on p.major_no = m.major_no;
+-- 과목번호, 과목명, 교수명, 수강가능한 총 인원수
+select s.subject_no, s.subject_name, 
+p.professor_name, s.total_count 
+from subject s 
+join professor p on s.professor_no = p.professor_no; 
+-- 수강번호, 학생이름, 과목명, 수강신청 시간, 담당교수
+select ss.su_no, s.std_name, 
+sj.subject_name, ss.add_time, p.professor_name 
+from subject_sugang ss 
+join student s on ss.student_no = s.std_no 
+join subject sj on ss.subject_no = sj.subject_no
+join professor p on p.professor_no = sj.professor_no;
+-- 수강신청을 하지 않은 학생들을 조회
+-- 학번, 이름, 학과명, 평점
 
 
 
