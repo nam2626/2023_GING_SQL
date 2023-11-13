@@ -196,7 +196,12 @@ join subject sj on ss.subject_no = sj.subject_no
 join professor p on p.professor_no = sj.professor_no;
 -- 수강신청을 하지 않은 학생들을 조회
 -- 학번, 이름, 학과명, 평점
-
+select s.std_no, s.std_name, 
+m.major_name, s.std_score
+from subject_sugang ss 
+right outer join student s on ss.student_no = s.std_no 
+join major m on s.major_no = m.major_no
+where ss.su_no is null;
 
 
 
