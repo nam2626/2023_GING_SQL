@@ -313,6 +313,11 @@ GROUP BY cm.CAR_MAKER_NAME, c.CAR_NAME, g.GRADE_NAME;
 
 --회원 성별, 판매 연도별, 차량 구매 횟수 총합, 최고 판매 금액, 최저 판매 금액
 --단 차량 구매 개수 5건 이하인 데이터만 기준으로 조회
+SELECT m.M_GENDER, to_char(cs.CAR_SELL_DATE,'YYYY'), sum(cs.CAR_SELL_EA),
+MAX(cs.CAR_SELL_PRICE), MIN(cs.CAR_SELL_PRICE)  
+FROM CAR_SELL cs JOIN MEMBER m ON m.M_ID = cs.M_ID
+WHERE cs.CAR_SELL_EA <= 5
+GROUP BY m.M_GENDER, to_char(cs.CAR_SELL_DATE,'YYYY');
 
 
 
@@ -320,3 +325,10 @@ GROUP BY cm.CAR_MAKER_NAME, c.CAR_NAME, g.GRADE_NAME;
 
 	 
 	 
+
+
+
+
+
+
+
