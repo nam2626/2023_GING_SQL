@@ -125,3 +125,40 @@ cs.CAR_ID, sum(cs.CAR_SELL_EA) AS SUM_EA
 FROM CAR_SELL cs
 GROUP BY TO_CHAR(cs.CAR_SELL_DATE,'MM'),cs.CAR_ID )
 GROUP BY MONTH);
+
+---------------------------------------------------
+---- 시퀸스
+---------------------------------------------------
+DROP SEQUENCE sell_no_seq;
+CREATE SEQUENCE sell_no_seq
+INCREMENT BY 1
+START WITH 5
+nominvalue
+nomaxvalue
+nocycle
+nocache
+;
+CREATE SEQUENCE sell_no_seq
+INCREMENT BY 1
+START WITH 10
+MINVALUE 10
+MAXVALUE 15
+CYCLE
+CACHE 2;
+SELECT sell_no_seq.nextval FROM dual;
+SELECT sell_no_seq.currval FROM dual;
+ALTER SEQUENCE sell_no_seq
+MAXVALUE 22
+MINVALUE 20
+CYCLE
+nocache;
+
+
+
+
+
+
+
+
+
+
