@@ -245,6 +245,18 @@ select * from student
 where std_no not in(select student_no from subject_sugang);
 
 -- 학과별 최고점을 받은 평점을 받은 학생을 조회
+select major_no, max(std_score) 
+from student
+group by major_no;
+
+select s.std_no, s.std_name, s.std_score, m.major_name
+from student s join major m on s.major_no = m.major_no
+where (s.major_no, s.std_score) in(
+select major_no, max(std_score) 
+from student group by major_no);
+
+
+
 
 
 
