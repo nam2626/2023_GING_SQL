@@ -233,6 +233,32 @@ join major m on s.major_no = m.major_no
 where ss.student_no is null
 group by m.major_name;
 
+-- SUB QUERY
+-- 학생 정보 조회
+-- 학번 이름 학과명 평점
+select s.std_no, s.std_name, s.std_score,
+(select m.major_name from major m where s.major_no = m.major_no)
+from student s ;
+
+-- 수강신청을 안한 학생 목록을 출력
+select * from student
+where std_no not in(select student_no from subject_sugang);
+
+-- 학과별 최고점을 받은 평점을 받은 학생을 조회
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
