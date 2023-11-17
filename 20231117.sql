@@ -28,6 +28,43 @@ END;
 
 SELECT get_odd_even(3) FROM DUAL;
 
+CREATE OR REPLACE FUNCTION GET_SCORE_GRADE(SCORE IN NUMBER)
+RETURN VARCHAR2
+AS 
+	GRADE VARCHAR2(30) := 'F';
+BEGIN
+	--성적 등급, A+,A,B+,B,C+,C,D+,D,F
+    IF SCORE = 4.5 THEN
+        GRADE := 'A+';
+    ELSIF SCORE >= 4.0 THEN
+        GRADE := 'A';
+    ELSIF SCORE >= 3.5 THEN
+        GRADE := 'B+';
+    ELSIF SCORE >= 3.0 THEN
+        GRADE := 'B';
+    ELSIF SCORE >= 2.5 THEN
+        GRADE := 'C+';
+    ELSIF SCORE >= 2.0 THEN
+        GRADE := 'C';
+    ELSIF SCORE >= 1.5 THEN
+        GRADE := 'D+';
+    ELSIF SCORE >= 1.0 THEN
+        GRADE := 'D';
+    ELSE
+        GRADE := 'F';
+    END IF;    
+    
+	RETURN GRADE;
+END GET_SCORE_GRADE;
+
+SELECT GET_SCORE_GRADE(3.6) FROM DUAL;
+
+
+
+
+
+
+
 
 
 
