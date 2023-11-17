@@ -253,7 +253,7 @@ END;
 DECLARE
     FAC NUMBER;
 BEGIN
-    PROCEDURE_EX4(0,FAC);
+    PROCEDURE_EX4(5,FAC);
      dbms_output.put_line(FAC);
      dbms_output.put_line('END');
 END;
@@ -264,20 +264,28 @@ CREATE OR REPLACE PROCEDURE PROCEDURE_EX5(
     RESULT OUT NUMBER
 )
 IS
+    USER_EXCEPTION EXCEPTION;
 BEGIN 
     INSERT INTO GRADE VALUES(GRADE_NO,GRADE_NAME);
+    IF GRADE_NO = 0 THEN
+        RAISE USER_EXCEPTION;
+    END IF;
     RESULT := 1;
     COMMIT;
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
             dbms_output.put_line('데이터가 중복되었습니다.');    
             RESULT := 0;
+        WHEN USER_EXCEPTION THEN
+            dbms_output.put_line('학과번호는 0보다 커야됩니다.');    
+            RESULT := 0;
+            ROLLBACK; --UPDATE, INSERT, DELETE 한 작업을 취소
 END;
 /
 DECLARE
     RESULT NUMBER;
 BEGIN
-    PROCEDURE_EX5(5,'DIAMOND',RESULT);
+    PROCEDURE_EX5(0,'DIAMOND',RESULT);
      dbms_output.put_line(RESULT);
      dbms_output.put_line('END');
 END;
