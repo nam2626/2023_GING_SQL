@@ -226,7 +226,36 @@ BEGIN
      dbms_output.put_line(FAC);
 END;
 /
-
-
+--사용자 Exception 처리
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX4(
+    NUM IN NUMBER,
+    RESULT OUT NUMBER
+)
+IS
+	I NUMBER := 0;
+    FAC NUMBER := 1;
+    USER_EXCEPTION EXCEPTION;
+BEGIN 
+    IF NUM = 0 THEN
+        RAISE USER_EXCEPTION;
+    END IF;
+	FOR I IN 1 .. NUM
+    LOOP
+        FAC := FAC * I;
+    END LOOP;
+    RESULT := FAC;
+    EXCEPTION
+        WHEN USER_EXCEPTION THEN
+            dbms_output.put_line('0 이상의 값을 넣어야합니다.');    
+            RESULT := 0;
+END;
+/
+DECLARE
+    FAC NUMBER;
+BEGIN
+    PROCEDURE_EX4(0,FAC);
+     dbms_output.put_line(FAC);
+     dbms_output.put_line('END');
+END;
 
 
