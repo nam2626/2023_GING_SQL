@@ -174,4 +174,59 @@ BEGIN
     
 END;
 /
+---------------------------------------
+SET SERVEROUTPUT ON;
+--프로시저 기본 예제
+--매개변수가 없을때
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX1
+IS
+	TEST_VAR VARCHAR2(1000) := 'AAAA';
+BEGIN 
+	dbms_output.put_line(TEST_VAR);
+END;
+/
+EXEC PROCEDURE_EX1;
+/
+--매개변수가 있을때
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX2(
+    NAME IN VARCHAR2,
+    AGE IN NUMBER
+)
+IS
+	TEST_VAR VARCHAR2(1000) := 'AAAA';
+BEGIN 
+	dbms_output.put_line(TEST_VAR || ' ' || NAME || ' ' || AGE);
+    INSERT INTO PERSON VALUES(NAME, AGE);
+    COMMIT;
+END;
+/
+EXEC PROCEDURE_EX2('홍길동111',33); 
+/
+--값을 외부로 전달할려고 할때
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX3(
+    NUM IN NUMBER,
+    RESULT OUT NUMBER
+)
+IS
+	I NUMBER := 0;
+    FAC NUMBER := 1;
+BEGIN 
+	FOR I IN 1 .. NUM
+    LOOP
+        FAC := FAC * I;
+    END LOOP;
+    RESULT := FAC;
+   
+END;
+/
+DECLARE
+    FAC NUMBER;
+BEGIN
+     PROCEDURE_EX3(5,FAC);
+     dbms_output.put_line(FAC);
+END;
+/
+
+
+
 
