@@ -257,5 +257,28 @@ BEGIN
      dbms_output.put_line(FAC);
      dbms_output.put_line('END');
 END;
-
+/
+CREATE OR REPLACE PROCEDURE PROCEDURE_EX5(
+    GRADE_NO IN NUMBER,
+    GRADE_NAME IN VARCHAR2,
+    RESULT OUT NUMBER
+)
+IS
+BEGIN 
+    INSERT INTO GRADE VALUES(GRADE_NO,GRADE_NAME);
+    RESULT := 1;
+    COMMIT;
+    EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            dbms_output.put_line('데이터가 중복되었습니다.');    
+            RESULT := 0;
+END;
+/
+DECLARE
+    RESULT NUMBER;
+BEGIN
+    PROCEDURE_EX5(5,'DIAMOND',RESULT);
+     dbms_output.put_line(RESULT);
+     dbms_output.put_line('END');
+END;
 
